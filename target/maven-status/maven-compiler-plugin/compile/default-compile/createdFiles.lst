@@ -1,4 +1,5 @@
-org\openjfx\DataEditorController.class
 module-info.class
-org\openjfx\DataViewer.class
+org\openjfx\DataEditorController.class
+org\openjfx\DataViewerController.class
 org\openjfx\App.class
+org\openjfx\AppTest.class
