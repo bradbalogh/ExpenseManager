@@ -1,10 +1,12 @@
 package org.openjfx;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,29 +23,100 @@ public class DataEditorController {
     @FXML ChoiceBox year_box;
     @FXML ChoiceBox month_box;
 
-
     @FXML
-    private void switchToSecondary() throws IOException {
+    public void switchToSecondary() throws IOException {
         App.setRoot("dataViewer");
     }
 
     @FXML
-    public void getDate() {
-        System.out.println(month_box.getValue());
-        System.out.println(year_box.getValue());
+    public String getDate() {
+        String date = "";
+        try {
+            String month = (month_box.getValue()).toString();
+            String year = (year_box.getValue()).toString();
+            date = (month + year);
+        } catch (NullPointerException ex) {
+            date = ("missingValue");
+        }
+        return date;
     }
 
     @FXML
-    private void addPayment() {
+    public void addPayment() {
+        String date = getDate();
         String paymentName = payment_name.getText();
         String paymentPrice = payment_price.getText();
         String paymentNotes = payment_notes.getText();
-        if(paymentName != "" && paymentPrice != "" && paymentNotes != "") {
-            Text payment = new Text("Payment Name: " + paymentName + "   " + "Payment Price:  " + paymentPrice + "   " + "Payment Notes: " + paymentNotes + '\n');
-            payment.setFill(Color.WHITE);
-            payment.setFont(Font.font("Verdana", 13));
-            text_pane.getChildren().add(payment);
+        if(date.equals("missingValue")){
+            Text paymentError = new Text("Please Select A Date To Add Payment"+ '\n');
+            paymentError.setFill(Color.YELLOW);
+            paymentError.setFont(Font.font("Verdana", 13));
+            text_pane.getChildren().add(paymentError);
         }
+        else if(paymentName.equals("") || paymentPrice.equals("")) {
+            Text paymentError = new Text("Payment Name And Payment Price Must Be Filled"+ '\n');
+            paymentError.setFill(Color.YELLOW);
+            paymentError.setFont(Font.font("Verdana", 13));
+            text_pane.getChildren().add(paymentError);
+        }
+        else {
+            try {
+                Float.parseFloat(paymentPrice);
+                Text paymentError = new Text("Added Payment: " + paymentName + " [" + date + "]" + '\n');
+                paymentError.setFill(Color.GREEN);
+                paymentError.setFont(Font.font("Verdana", 13));
+                text_pane.getChildren().add(paymentError);
+                writeToFile();
+            } catch (NumberFormatException e) {
+                Text paymentError = new Text("Payment Price Must Be Entered As Type Double i.e. 15.25"+ '\n');
+                paymentError.setFill(Color.YELLOW);
+                paymentError.setFont(Font.font("Verdana", 13));
+                text_pane.getChildren().add(paymentError);
+            }
+        }
+    }
+
+    @FXML
+    private void writeToFile() {
+        String date = getDate();
+        String paymentName = payment_name.getText();
+        String paymentPrice = payment_price.getText();
+        String paymentNotes = payment_notes.getText();
+
+        try {
+            // create a list of objects
+            List<List<String>> records = Arrays.asList(
+                    Arrays.asList(date, paymentName, paymentPrice, paymentNotes)
+            );
+            // create a writer
+            FileWriter fileWritter = new FileWriter("payments.csv",true);
+            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+            // write all records
+            for (List<String> record : records) {
+                bufferWritter.write(String.join(",", record));
+                bufferWritter.newLine();
+            }
+            //close the writer
+            bufferWritter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        fileToArray();
+    }
+
+    @FXML
+    public List<List<String>> fileToArray() {
+        List<List<String>> records = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("payments.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+            }
+        } catch (IOException ex){
+            System.out.println("File Not Found");
+        }
+        return records;
     }
 
     @FXML
