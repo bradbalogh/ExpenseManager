@@ -1,4 +1,4 @@
-package org.openjfx;
+package edu.depaul.expense;
 
 import java.io.*;
 import java.util.ArrayList;

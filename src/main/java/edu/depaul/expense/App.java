@@ -1,4 +1,4 @@
-package org.openjfx;
+package edu.depaul.expense;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
