@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <surefire.version>3.0.0-M4</surefire.version>
-        <java.jdk>C:\Program Files\Java\jdk-12.0.2\bin\java</java.jdk>
+        <!--><java.jdk>C:\Program Files\Java\jdk-12.0.2\bin\java</java.jdk><-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -134,7 +134,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <executable>${java.jdk}</executable>
+                    <!--><executable>${java.jdk}</executable><-->
                     <mainClass>org.openjfx.App</mainClass>
                 </configuration>
             </plugin>
