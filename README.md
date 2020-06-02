@@ -15,7 +15,7 @@ Data Editor
 Data Viewer
 - After adding data, you can view the payments by clicking the Load Data button found at the top right of the window
 - You will be shown the total amount of money spent for everything added to the payment data file
-- If you would like to clear the data file you can select the Delete Data File button found at the bottom of the screen
+- If you would like to clear the data file you can click the Delete Data File button found at the bottom of the screen
   - Note: Deleting the data file will result in losing any payment data that was previously added
 
 <img src="images/EM.gif">
