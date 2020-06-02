@@ -11,6 +11,7 @@ Data Editor
 - The payment data is stored to a csv file so that it can be accessed after the session is closed
 - To view the payment data, click the View Data button found at the top left of the window
 
+
 Data Viewer
 - After adding data, you can view the payments by clicking the Load Data button found at the top right of the window
 - You will be shown the total amount of money spent for everything added to the payment data file
