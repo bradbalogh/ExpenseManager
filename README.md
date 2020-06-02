@@ -6,7 +6,7 @@ Data Editor
 - Begin by selecting a month and year you want to log data for
 - Add payment data in the appropriate text fields
   - Payment Name and Payment Price are required, Notes are optional
-- To add the payment information, select the + button to the left of the text fields
+- To add the payment information, click the + button to the left of the text fields
 - If you would like to clear the text fields you can click the -- button to the right of the text fields
 - The payment data is stored to a csv file so that it can be accessed after the session is closed
 - To view the payment data, click the View Data button found at the top left of the window
