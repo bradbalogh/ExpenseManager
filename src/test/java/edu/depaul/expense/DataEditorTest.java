@@ -2,12 +2,11 @@ package edu.depaul.expense;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +18,9 @@ import org.testfx.api.FxRobot;
 import javafx.scene.control.Button;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-
-import javax.swing.*;
 
 @ExtendWith(ApplicationExtension.class)
-public class AppTest extends ApplicationTest{
+public class DataEditorTest extends ApplicationTest{
 
     @Override
     public void start (Stage stage) throws Exception {
@@ -46,8 +42,67 @@ public class AppTest extends ApplicationTest{
     }
 
     @Test
+    @DisplayName("Tests to see if the clear button is working properly for the name")
+    public void testClearName (FxRobot robot) {
+        // adds payment name
+        clickOn("#payment_name");
+        String pname = "Amazon Prime";
+        write(pname);
+        // adds payment price
+        clickOn("#payment_price");
+        write("5.00");
+        clickOn("#clearFields");
+        sleep(500);
+        // checks to see if the field was cleared
+        Assertions.assertThat(robot.lookup("#payment_name").queryAs(TextField.class)).doesNotHaveText(pname);
+    }
+
+    @Test
+    @DisplayName("Tests to see if the clear button is working properly for the price")
+    public void testClearPrice (FxRobot robot) {
+        // adds payment name
+        clickOn("#payment_name");
+        String pname = "Amazon Prime";
+        write(pname);
+        // adds payment price
+        clickOn("#payment_price");
+        String pprice = "5.00";
+        write(pprice);
+        clickOn("#clearFields");
+        sleep(500);
+        // checks to see if the field was cleared
+        Assertions.assertThat(robot.lookup("#payment_price").queryAs(TextField.class)).doesNotHaveText(pprice);
+    }
+
+    @Test
     @DisplayName("Adds a date and payment with legal formatting")
     public void testAddLegalPayment (FxRobot robot) {
+        // adds month
+        clickOn("#month_box");
+        String month = "June";
+        clickOn(month);
+        // adds year
+        clickOn("#year_box");
+        String year = "2020";
+        clickOn(year);
+        // adds payment name
+        clickOn("#payment_name");
+        String pname = "Amazon Prime";
+        write(pname);
+        // adds payment price
+        clickOn("#payment_price");
+        write("5.00");
+        clickOn("#add_payment");
+        sleep(500);
+        // checks to see if payment was added successfully
+        String stringBuild = ("Added Payment: "+pname+" ["+month+year+"]\n");
+        Assertions.assertThat(robot.lookup("#text_pane").queryAs(TextFlow.class)).hasText(stringBuild);
+        //sleep(3000);
+    }
+
+    @Test
+    @DisplayName("Adds a date and payment with note in legal formatting")
+    public void testAddLegalPaymentWithNote (FxRobot robot) {
         // adds month
         clickOn("#month_box");
         String month = "June";

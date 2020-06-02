@@ -54,7 +54,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" onAction="#deleteFile" text="Delete Data File" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="clear_data" mnemonicParsing="false" onAction="#deleteFile" text="Delete Data File" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="20.0" />
          </GridPane.margin>

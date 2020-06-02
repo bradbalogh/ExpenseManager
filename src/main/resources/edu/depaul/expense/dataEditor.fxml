@@ -32,7 +32,7 @@
             <Insets left="10.0" top="10.0" />
          </GridPane.margin>
       </Button>
-      <TextField fx:id="payment_name" alignment="CENTER" promptText="Payment Name" style="-fx-background-color: #232332; -fx-text-fill: white;" GridPane.valignment="CENTER">
+      <TextField fx:id="payment_name" alignment="CENTER" promptText="Payment Name *" style="-fx-background-color: #232332; -fx-text-fill: white;" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="80.0" right="-20.0" top="80.0" />
          </GridPane.margin>
@@ -40,7 +40,7 @@
             <Insets />
          </opaqueInsets>
       </TextField>
-      <TextField fx:id="payment_price" alignment="CENTER" promptText="Payment Price" style="-fx-background-color: #232332; -fx-text-fill: white;" GridPane.columnIndex="1">
+      <TextField fx:id="payment_price" alignment="CENTER" promptText="Payment Price *" style="-fx-background-color: #232332; -fx-text-fill: white;" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="60.0" right="60.0" top="80.0" />
          </GridPane.margin>
@@ -55,7 +55,7 @@
             <Insets left="35.0" top="80.0" />
          </GridPane.margin>
       </Button>
-      <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clearFields" style="-fx-background-radius: 50;" text="--" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+      <Button fx:id="clearFields" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clearFields" style="-fx-background-radius: 50;" text="--" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
          <GridPane.margin>
             <Insets right="35.0" top="80.0" />
          </GridPane.margin>
